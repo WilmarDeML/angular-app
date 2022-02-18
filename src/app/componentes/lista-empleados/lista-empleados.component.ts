@@ -33,6 +33,7 @@ export class ListaEmpleadosComponent implements OnInit {
   atras:string = '<'
   page:number = 1;
   mostrarFormulario:boolean = false;
+  mostrarIconos:boolean = false;
   idForm:number = 0;
 
   ngOnInit() {
@@ -58,8 +59,8 @@ export class ListaEmpleadosComponent implements OnInit {
         ++this.id
       )
     ).subscribe(data => {
-      console.log(data)
       this.empleado = data;
+      this.mostrarIconos = true;
     })
   }
 
@@ -69,6 +70,7 @@ export class ListaEmpleadosComponent implements OnInit {
         data => {
         this.empleado = data;
         this.mostrarFormulario = false;
+        this.mostrarIconos = true;
       }
     )
   }
@@ -76,8 +78,9 @@ export class ListaEmpleadosComponent implements OnInit {
   eliminarEmpleado(id:number){
     this.empleadosService.deleteEmpleado(id)
       .subscribe(data => {
-        console.log(data);
+
         this.empleado = {};
+        this.mostrarIconos = false;
       })
   }
 
@@ -94,5 +97,6 @@ export class ListaEmpleadosComponent implements OnInit {
   mostrarFormularioEditar(id:number) {
     this.idForm = id;
     this.mostrarFormulario = true;
+    this.mostrarIconos = false;
   }
 }
