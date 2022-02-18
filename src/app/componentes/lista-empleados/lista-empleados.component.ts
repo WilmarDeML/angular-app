@@ -13,15 +13,15 @@ export class ListaEmpleadosComponent implements OnInit {
 
   constructor(public empleadosService: EmpleadosService) { }
   id:number = 0;
-  // empleados:Empleado[] = [
+  empleados:Empleado[] = [
 
-  //   new Empleado('Wilmar', 'Zapata', 'Desarrollador', 1000, 'Stefanini', 'Masculino', ++this.id),
-  //   new Empleado('Sandra', 'Gil', 'Presidente', 1500, 'BrostySabor', 'Femenino', ++this.id),
-  //   new Empleado('Miguel', 'Jaramillo', 'Universitario', 800, 'IESA', 'Masculino', ++this.id),
-  //   new Empleado('Isaac', 'Echeverri', 'Preescolar', 200, 'Comfama', 'Masculino', ++this.id)
+    new Empleado('Wilmar', 'Zapata', 'Desarrollador', 1000, 'Stefanini', 'Masculino', ++this.id),
+    new Empleado('Sandra', 'Gil', 'Presidente', 1500, 'BrostySabor', 'Femenino', ++this.id),
+    new Empleado('Miguel', 'Jaramillo', 'Universitario', 800, 'IESA', 'Masculino', ++this.id),
+    new Empleado('Isaac', 'Echeverri', 'Preescolar', 200, 'Comfama', 'Masculino', ++this.id)
 
-  // ];
-  empleado:any;
+  ];
+
   cuadroNombre:string = '';
   cuadroApellido:string = '';
   cuadroCargo:string = '';
@@ -33,7 +33,6 @@ export class ListaEmpleadosComponent implements OnInit {
   atras:string = '<'
   page:number = 1;
   mostrarFormulario:boolean = false;
-  mostrarIconos:boolean = false;
   idForm:number = 0;
 
   ngOnInit() {
@@ -59,8 +58,8 @@ export class ListaEmpleadosComponent implements OnInit {
         ++this.id
       )
     ).subscribe(data => {
-      this.empleado = data;
-      this.mostrarIconos = true;
+      this.empleados.push(data);
+      this.reiniciarCuadros();
     })
   }
 
@@ -68,9 +67,9 @@ export class ListaEmpleadosComponent implements OnInit {
     this.empleadosService.editEmpleado(nuevoEmpleado, id)
       .subscribe(
         data => {
-        this.empleado = data;
+        this.empleados[id] = {...data, id};
         this.mostrarFormulario = false;
-        this.mostrarIconos = true;
+        this.reiniciarCuadros();
       }
     )
   }
@@ -78,9 +77,8 @@ export class ListaEmpleadosComponent implements OnInit {
   eliminarEmpleado(id:number){
     this.empleadosService.deleteEmpleado(id)
       .subscribe(data => {
-
-        this.empleado = {};
-        this.mostrarIconos = false;
+        console.log(data);
+        this.empleados = this.empleados.filter(empleado => empleado.id !== id);
       })
   }
 
@@ -97,6 +95,10 @@ export class ListaEmpleadosComponent implements OnInit {
   mostrarFormularioEditar(id:number) {
     this.idForm = id;
     this.mostrarFormulario = true;
-    this.mostrarIconos = false;
+  }
+
+  reiniciarCuadros(){
+    this.cuadroNombre = '';
+    this.cuadroApellido = '';
   }
 }
