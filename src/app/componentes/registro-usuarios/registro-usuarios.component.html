@@ -1,0 +1,28 @@
+<h1 style="text-align: center">{{titulo}}</h1>
+<form class="form-horizontal mb-2">
+  <!-- Nombre -->
+  <div class="form-group">
+    <label for="Nombre" class="col-md-2 control-label">Nombre</label>
+    <div class="col-md-10">
+      <input type="text" name="nombre" [(ngModel)]="nombre" class="form-control">
+    </div>
+  </div>
+  <!-- Apellido -->
+  <div class="form-group">
+    <label for="Apellido" class="col-md-2 control-label">Apellido</label>
+    <div class="col-md-10">
+      <input type="text" name="apellido" [(ngModel)]="apellido" class="form-control">
+    </div>
+  </div>
+  <!-- Botón Registrar -->
+  <div class="btn-group btn-group-justified my-2">
+    <input type="submit" value={{opcionRegistrar}} (click)="registrar()" class="btn btn-primary">
+  </div>
+  <h2 *ngIf="registrado; else noRegistrado">{{mensaje}} {{nombre}} {{apellido}}</h2>
+  <ng-template #noRegistrado>
+    <p>Nadie registrado</p>
+  </ng-template>
+</form>
+<ul>
+  <li *ngFor="let entrada of entradas">{{entrada.titulo}}</li>
+</ul>

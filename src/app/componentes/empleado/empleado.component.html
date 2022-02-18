@@ -1,0 +1,43 @@
+<h1>{{titulo}}</h1>
+<!-- Interpolación estática -->
+<div class="form-group">
+  <p class="form-control">Nombre del empleado: {{empleado.nombre}}</p>
+  <p class="form-control">Apellido del empleado: {{empleado.apellido}}</p>
+  <div>
+    <label for="empresa" class="col-md-2 control-label">Nombre de la empresa</label>
+    <input type="text" name="empresa" placeholder="Empresa..." [(ngModel)]="empleado.empresa" class="form-control">
+    <p class="form-control">Empresa del empleado: {{empleado.empresa}}</p>
+  </div>
+</div>
+
+<!-- Binding  -->
+<div class="form-group pb-2">
+  <label for="edad" class="col-md-2 control-label">Edad del empleado</label>
+  <div>
+    <input type="number" name="edad" #edad placeholder="Edad..." (input)="cambiarEdad(edad.value)" [disabled]='!habilitado' class="form-control">
+    <span style="font-size: x-small; color: red;"> {{alerta}}</span><br>
+  </div>
+  <div class="form-check form-switch mb-3">
+    <input class="form-check-input" type="checkbox" name="check" id="habilitar" (change)="onCheckboxChange($event)" value="valor" checked>
+    <label class="form-check-label" for="habilitar">{{textoHabilitar}}</label>
+  </div>
+  <!-- Interpolación dinámica -->
+  <p class="form-control">Edad del empleado: {{getEdad()}}</p>
+  <p class="form-control">{{getEdad() <= 0 ? 'Sin Edad' : getEdad() > 17 ? 'Mayor de edad' : 'Menor de Edad'}}</p>
+
+  <p *ngIf="empleado.sexo" class="form-control">Género: {{empleado.sexo}}</p>
+  <p *ngIf="!empleado.sexo" class="form-control">Elegir género</p>
+
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="sexo" id="sexo" value="masculino" (click)="setSexo($event)">
+    <label class="form-check-label" for="sexo">
+      Masculino
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="sexo" id="sexo" value="femenino" (click)="setSexo($event)">
+    <label class="form-check-label" for="sexo">
+      Femenino
+    </label>
+  </div>
+</div>

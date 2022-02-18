@@ -1,0 +1,23 @@
+<h1>{{titulo}}</h1>
+
+<form class="form-horizontal mb-2">
+  <div class="form-group">
+    <label for="Numero1" class="col-md-2 control-label">Numero 1</label>
+    <div class="col-md-10">
+      <input type="number" name="numero1" [(ngModel)]="numero1" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Numero2" class="col-md-2 control-label">Numero 1</label>
+    <div class="col-md-10">
+      <input type="number" name="numero2" [(ngModel)]="numero2" class="form-control">
+    </div>
+  </div>
+  <div class="btn-group btn-group-justified mt-2">
+    <input type="submit" value="sumar" (click)="sumar()" class="btn btn-primary">
+    <input type="submit" value="restar" (click)="restar()" class="btn btn-primary">
+    <input type="submit" value="multiplicar" (click)="multiplicar()" class="btn btn-primary">
+  </div>
+</form>
+
+<h2>Resultado: {{resultado}}</h2>
